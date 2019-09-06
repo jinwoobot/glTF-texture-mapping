@@ -1,5 +1,5 @@
 # playcanvas-gltf
-![gtTF viewer](/images/duck.jpg?raw=true "glTF Viewer")
+![Alt text](/images/duck.jpg)
 
 ## loadGltf
 gltf는 텍스쳐들이 참조하기 때문에 (glb는 포함압축이진) 그냥 아래와 같이 로드하면 텍스쳐들이 적용됩니다.
