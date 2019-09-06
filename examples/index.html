@@ -57,13 +57,13 @@
         gltfRoot.addComponent('script');
         gltfRoot.script.create('rotate');
         app.root.addChild(gltfRoot);
-        
-       
-        
+
+
+
         // *****************************
         // Default glTF Texture loading
         // *****************************
-        const duck  = new pc.Entity();
+        const duck = new pc.Entity();
         duck.name = 'duck';
         gltfRoot.addChild(duck);
         const duckurl = `assets/monkey/Duck.gltf`;
@@ -77,14 +77,14 @@
                 duck.addComponent('model');
                 duck.model.model = res.model;
             }, {
-                    basePath: 'assets/monkey/'
-                });
+                basePath: 'assets/monkey/'
+            });
         });
-        
+
         // *****************************
         // Default glTF Texture loading
         // *****************************
-        var wheels  = new pc.Entity();
+        var wheels = new pc.Entity();
         gltfRoot.addChild(wheels);
         app.assets.loadFromUrl('assets/monkey/Wheel_19.gltf', 'json', function (err, asset) {
             var json = asset.resource;
@@ -94,8 +94,8 @@
                 wheels.addComponent('model');
                 wheels.model.model = res.model;
             }, {
-                    basePath: 'assets/monkey/'
-                });
+                basePath: 'assets/monkey/'
+            });
         });
 
 
@@ -108,28 +108,31 @@
         const that = this;
 
 
-        let normalTexture = new pc.Texture(that.app.graphicsDevice, {
-            format: pc.PIXELFORMAT_R8_G8_B8,
-            autoMipmap: true,
-        });
-        normalTexture.setSource(normalImage);
+
 
         diffuseImage.onload = () => {
-                let texture = new pc.Texture(that.app.graphicsDevice, {
-                    format: pc.PIXELFORMAT_R8_G8_B8,
-                    autoMipmap: true,
-                });
-                texture.setSource(diffuseImage);
 
-                const material = new pc.StandardMaterial();
-                material.diffuseMap = texture;
-                material.normalMap = normalTexture;
-                material.bumpiness = 1.5;
-                material.update();
+            let normalTexture = new pc.Texture(that.app.graphicsDevice, {
+                format: pc.PIXELFORMAT_R8_G8_B8,
+                autoMipmap: true,
+            });
+            normalTexture.setSource(normalImage);
 
-                setTimeout(() => {
-                    wheels.model.meshInstances[0].material = material; 
-                }, 50);
+            let diffusetexture = new pc.Texture(that.app.graphicsDevice, {
+                format: pc.PIXELFORMAT_R8_G8_B8,
+                autoMipmap: true,
+            });
+            diffusetexture.setSource(diffuseImage);
+
+            const material = new pc.StandardMaterial();
+            material.diffuseMap = diffusetexture;
+            material.normalMap = normalTexture;
+            material.bumpiness = 1.5;
+            material.update();
+
+            setTimeout(() => {
+                wheels.model.meshInstances[0].material = material;
+            }, 50);
         };
 
     </script>
