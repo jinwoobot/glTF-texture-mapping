@@ -84,57 +84,104 @@
         // *****************************
         // Default glTF Texture loading
         // *****************************
-        var wheels = new pc.Entity();
-        gltfRoot.addChild(wheels);
-        app.assets.loadFromUrl('assets/monkey/Wheel_19.gltf', 'json', function (err, asset) {
-            var json = asset.resource;
-            var gltf = JSON.parse(json);
-            loadGltf(gltf, app.graphicsDevice, function (err, res) {
-                // add the loaded scene to the hierarchy
-                wheels.addComponent('model');
-                wheels.model.model = res.model;
-            }, {
-                basePath: 'assets/monkey/'
-            });
-        });
+        // var wheels = new pc.Entity();
+        // gltfRoot.addChild(wheels);
+        // app.assets.loadFromUrl('assets/monkey/Wheel_19.gltf', 'json', function (err, asset) {
+        //     var json = asset.resource;
+        //     var gltf = JSON.parse(json);
+        //     loadGltf(gltf, app.graphicsDevice, function (err, res) {
+        //         // add the loaded scene to the hierarchy
+        //         wheels.addComponent('model');
+        //         wheels.model.model = res.model;
+        //     }, {
+        //         basePath: 'assets/monkey/'
+        //     });
+        // });
 
 
-        let diffuseImage = new Image();
-        diffuseImage.src = `assets/monkey/Wheel_Diffuse.png`;
+        // let diffuseImage = new Image();
+        // diffuseImage.src = `assets/monkey/Wheel_Diffuse.png`;
 
-        let normalImage = new Image();
-        normalImage.src = `assets/monkey/Wheel_normals.png`;
+        // let normalImage = new Image();
+        // normalImage.src = `assets/monkey/Wheel_normals.png`;
 
-        const that = this;
-
-
+        // const that = this;
 
 
-        diffuseImage.onload = () => {
 
-            let normalTexture = new pc.Texture(that.app.graphicsDevice, {
-                format: pc.PIXELFORMAT_R8_G8_B8,
-                autoMipmap: true,
-            });
-            normalTexture.setSource(normalImage);
 
-            let diffusetexture = new pc.Texture(that.app.graphicsDevice, {
-                format: pc.PIXELFORMAT_R8_G8_B8,
-                autoMipmap: true,
-            });
-            diffusetexture.setSource(diffuseImage);
+        // diffuseImage.onload = () => {
 
-            const material = new pc.StandardMaterial();
-            material.diffuseMap = diffusetexture;
-            material.normalMap = normalTexture;
-            material.bumpiness = 1.5;
-            material.update();
+        //     let normalTexture = new pc.Texture(that.app.graphicsDevice, {
+        //         format: pc.PIXELFORMAT_R8_G8_B8,
+        //         autoMipmap: true,
+        //     });
+        //     normalTexture.setSource(normalImage);
 
-            setTimeout(() => {
-                wheels.model.meshInstances[0].material = material;
-            }, 50);
-        };
+        //     let diffusetexture = new pc.Texture(that.app.graphicsDevice, {
+        //         format: pc.PIXELFORMAT_R8_G8_B8,
+        //         autoMipmap: true,
+        //     });
+        //     diffusetexture.setSource(diffuseImage);
 
+        //     const material = new pc.StandardMaterial();
+        //     material.diffuseMap = diffusetexture;
+        //     material.normalMap = normalTexture;
+        //     material.bumpiness = 1.5;
+        //     material.update();
+
+        //     setTimeout(() => {
+        //         wheels.model.meshInstances[0].material = material;
+        //     }, 50);
+        // };
+
+        // **********************************************************
+        // glTF model load: Texture with downloaded material from editor
+        // https://github.com/playcanvas/engine/issues/1096 
+        // This has bug that does not laod properly
+        // **********************************************************
+        // var wheels = new pc.Entity();
+        // gltfRoot.addChild(wheels);
+        // let materialUrl = 'assets/monkey/22879834/New Material.json';
+        // app.assets.loadFromUrl(materialUrl, 'material', (err, materialAsset) => {
+        //     app.assets.loadFromUrl('assets/monkey/Wheel_19.gltf', 'json', function (err, asset) {
+        //         var json = asset.resource;
+        //         var gltf = JSON.parse(json);
+
+                
+        //         loadGltf(gltf, app.graphicsDevice, function (err, res) {
+        //             // add the loaded scene to the hierarchy
+        //             wheels.addComponent('model');
+        //             wheels.model.model = res.model;
+        //             console.log(wheels.model.model.meshInstances[0]);
+        //             wheels.model.model.meshInstances[0].material = materialAsset.resource;
+                    
+        //             console.log(wheels.model.model.meshInstances[0].material);
+        //         }, {
+        //             basePath: 'assets/monkey/'
+        //         });
+        //     });
+        // });
+
+        // **********************************************************
+        // JSON model load:  Texture with downloaded material from editor
+        // https://github.com/playcanvas/engine/issues/1096 
+        // This has bug that does not laod properly
+        // **********************************************************
+        
+        // let materialUrl = 'assets/monkey/22879834/New Material.json';
+        // this.app.assets.loadFromUrl(materialUrl, 'material', (err, materialAsset) => {
+        //     var wheels = new pc.Entity();
+        //     var url = 'assets/monkey/json/Wheel_19.json'
+        //     this.app.assets.loadFromUrl(url, 'model', function (err, asset) {
+        //         wheels.addComponent('model', {
+        //             type: 'asset',
+        //             asset: asset,
+        //         });
+        //         wheels.model.meshInstances[0].material = materialAsset.resource;
+        //         gltfRoot.addChild(wheels);
+        //     })
+        // });
     </script>
 </body>
 
